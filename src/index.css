@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Satoshi", "sans-serif";
+  --font-poppins: "Poppins", "sans-serif";
+  --breakpoint-3xl: 120rem;
+  --color-background: #f3f5f9;
+  --width-tlM: 380px;
+  --width-tlL: 480px;
+  
+}
