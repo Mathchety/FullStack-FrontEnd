@@ -12,7 +12,7 @@ const Label: React.FC<LabelProps> = ({ name, value, onClick }) => {
         name={name}
         value={value}
         onClick={(event) => onClick(event)}
-        className="bg-transparent border-none cursor-pointer text-black hover:text-gray-800"
+        className="bg-transparent border-none cursor-pointer text-gray-400 hover:text-gray-200"
       >
         {value}
       </button>
