@@ -47,17 +47,25 @@ function Dashboard() {
   const user = authService.getUser();
 
   return (
-    <div className="gap-4">
-      <h1 className="mb-3">Listagem</h1>
+    <div className="bg-black h-[100vh] px-10 pt-4">
+      <div className="gap-4 ">
+      <div className="flex text-white font-bold border-b-2 border-white pb-2 mb-2">
+        <div className="w-1/2">Usuário</div>
+        <div className="w-1/2">Email</div>
+      </div>
       <ul>
         {usuarios.map((usuario) => (
           <li key={usuario.id}>
-            <h2>
-              Usuário: {usuario.name} - Email: {usuario.email}
-            </h2>
+        <div className="flex text-white border-2 border-white mb-2">
+          <div className="w-1/2 px-2">{usuario.name}</div>
+          <div className="w-1/2 px-2">{usuario.email}</div>
+        </div>
           </li>
         ))}
       </ul>
+
+      </div>
+      
       <div className="mt-4">
         <Button name="logout" value="Sair" onClick={handleLogout} />
       </div>

@@ -25,7 +25,7 @@ const InputField: React.FC<InputFieldProps> = ({
     <div className="mb-4  ">
       <label
         htmlFor={name}
-        className="block text-gray-700 text-sm font-bold mb-2"
+        className="block text-white text-sm font-bold mb-2"
       >
         {label} {required && <span className="text-red-500">*</span>}
       </label>
@@ -37,7 +37,7 @@ const InputField: React.FC<InputFieldProps> = ({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        className="shadow appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="shadow appearance-none w-full border rounded py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
       />
       {tooltip && <p className="mt-1 text-xs text-gray-500">{tooltip}</p>}
     </div>

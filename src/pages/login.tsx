@@ -61,7 +61,7 @@ function Login() {
 
   return (
     <div className="bg-background w-full h-screen items-center justify-center flex">
-      <div className="bg-gray-300 rounded-3xl p-6 w-tlM lg:w-2/5 xl:w-2/6 flex justify-center items-center border-black border shadow shadow-black">
+      <div className="bg-black rounded-3xl p-6 w-tlM lg:w-2/5 xl:w-2/6 flex justify-center items-center border-white border shadow shadow-gray-700">
         <form
           className="flex-row justify-center items-center w-3/5"
           method="get"
