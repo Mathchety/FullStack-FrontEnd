@@ -3,21 +3,15 @@ import { useNavigate } from "react-router-dom";
 import InputField from "../componentes/inputField";
 import Button from "../componentes/button";
 import Label from "../componentes/label";
+import authService from "../services/authService";
 
 function Login() {
   const [formData, setFormData] = useState({
-    nome: "",
-    titulo: "",
-    descricao: "",
-    data: "",
-    hora: "",
-    link: "",
-    categoria: "",
-    local: "",
     email: "",
     senha: "",
-    fonte: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -29,11 +23,37 @@ function Login() {
     });
   };
 
-  const handleDashboard = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    localStorage.setItem("token", "tokenTeste");
-    navigate("/dashboard");
+
+    // Validação básica
+    if (!formData.email || !formData.senha) {
+      setError("Por favor, preencha todos os campos");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const success = await authService.login({
+        email: formData.email,
+        password: formData.senha,
+      });
+
+      if (success) {
+        navigate("/dashboard");
+      } else {
+        setError("Email ou senha incorretos");
+      }
+    } catch (err) {
+      setError("Ocorreu um erro ao fazer login. Tente novamente.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
+
   const handleRegister = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     navigate("/cadastro");
@@ -41,11 +61,15 @@ function Login() {
 
   return (
     <div className="bg-background w-full h-screen items-center justify-center flex">
-      <div className="bg-gray-400 rounded-3xl p-6 w-tlM lg:w-2/5 xl:w-2/6  flex justify-center items-center border-black border shadow shadow-black">
+      <div className="bg-gray-400 rounded-3xl p-6 w-tlM lg:w-2/5 xl:w-2/6 flex justify-center items-center border-black border shadow shadow-black">
         <form
           className="flex-row justify-center items-center w-3/5"
           method="get"
         >
+          {error && (
+            <div className="text-red-500 mb-4 text-center">{error}</div>
+          )}
+
           <InputField
             type="email"
             name="email"
@@ -53,6 +77,7 @@ function Login() {
             onChange={handleChange}
             label="Email:"
             value={formData.email}
+            required
           />
           <InputField
             type="password"
@@ -61,19 +86,19 @@ function Login() {
             onChange={handleChange}
             label="Senha:"
             value={formData.senha}
+            required
           />
           <div className="flex items-center justify-between gap-4">
             <Button
               name="btnLogin"
-              value="Login"
-              onClick={handleDashboard}
+              value={loading ? "Carregando..." : "Login"}
+              onClick={handleLogin}
             />
             <Label
               name="btnRegister"
               value="Cadastrar-se"
               onClick={handleRegister}
             />
-            
           </div>
         </form>
       </div>
